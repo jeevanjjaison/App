@@ -5,9 +5,12 @@ import adminimg from '../images/admin.png';
 import { useNavigate } from "react-router-dom";
 import { useDispatch , useSelector } from 'react-redux';
 import { setUserName ,setStatus} from "../Store/Action"
+import Cookies from 'js-cookie';
+import { apiUrl } from "../config";
 
 
 const Login = ({permission}) => {
+    
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
@@ -18,13 +21,13 @@ const Login = ({permission}) => {
     const login = async() => {
 
         try {
-            const response = await Axios.post("https://ticketapps1.onrender.com/ticket/login", {
+            const response = await Axios.post(`${apiUrl}/ticket/login`, {
                 email: email,
                 password: password,
             });
             if (response.data) {
                 console.log(response.data);
-                dispatch(setUserName(response.data))
+                Cookies.set('authToken', response.data, { expires: 1 / 24 }); // Expires in 1 hour (1/24 of a day)
                 dispatch(setStatus(true)) 
                 navigate("/");               
             }
@@ -43,7 +46,7 @@ const Login = ({permission}) => {
             <div className="container-fluid h-custom">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-md-9 col-lg-6 col-xl-5">
-                        <img src={(permission === 'User')?loginimg:adminimg} className="img-fluid" />
+                        <img src={(permission === 'User')?loginimg:adminimg} className="img-fluid" style={{opacity: 0.9}} />
                     </div>
                     <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                         <form>
@@ -79,7 +82,7 @@ const Login = ({permission}) => {
 
                             <div className="text-center text-lg-start mt-4 pt-2">
                                 <button type="button" className="btn btn-primary btn-lg" onClick={login}>Login</button>
-                                <p className="small fw-bold mt-2 pt-1 mb-0">Login to your account <a onClick={()=>navigate("/signup")} className="link-danger">Sign Up</a></p>
+                                <p className="small fw-bold mt-2 pt-1 mb-0">Login to your account <a onClick={()=>navigate("/signup")} className="link-danger" style={{cursor: 'pointer'}}>Sign Up</a></p>
                             </div>
 
                         </form>

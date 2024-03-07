@@ -3,6 +3,7 @@ import './Modal.css';
 import { Close } from '../Icons/icons';
 import Axios from 'axios';
 import { useSelector } from 'react-redux';
+import { apiUrl } from '../config';
 
 const Modal = ({ isOpen, setModalOpen ,status, setStatus}) => {
     const users = useSelector((state) => state.users);

@@ -1,8 +1,10 @@
+import Cookies from 'js-cookie';
 
 const Home = ({page}) => {  
-   
+    const authToken = Cookies.get('authToken');
+
     return (
-        <h1>Hello World</h1>
+        <h1>{authToken}</h1>
     );
 };
 

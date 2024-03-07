@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { apiUrl } from "../config";
 
 const SignUp = ({page}) => {
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ const SignUp = ({page}) => {
     const register = (e) => {
         console.log(user);
         e.preventDefault();
-        Axios.post("https://ticketapps1.onrender.com/ticket/register", {
+        Axios.post(`${apiUrl}/ticket/register`, {
             email: user.email,
             name: user.name,
             password: user.password,
@@ -93,25 +94,15 @@ const SignUp = ({page}) => {
                                 <label className="form-label">Password</label>
                             </div>
 
-                            <div className="d-flex justify-content-between align-items-center">
-                                <div className="form-check mb-0">
-                                    <input className="form-check-input me-2" type="checkbox" name="admin" value="" onChange={handleChange} />
-                                    <label className="form-check-label">
-                                        Admin
-                                    </label>
-                                </div>
-                                {/* <a href="#" className="text-body">Forgot password?</a> */}
-                            </div>
-
-                            <div className="text-center text-lg-start mt-4 pt-2">
+                              <div className="text-center text-lg-start mt-4 pt-2">
                                 <button type="button" className="btn btn-primary btn-lg" onClick={register}>Sign Up</button>
-                                <p className="small fw-bold mt-2 pt-1 mb-0">Login to your account <a onClick={()=>navigate("/login")} className="link-danger">Login</a></p>
+                                <p className="small fw-bold mt-2 pt-1 mb-0 ">Login to your account <a onClick={()=>navigate("/login")} className="link-danger " style={{cursor: 'pointer'}}>Login</a></p>
                             </div>
 
                         </form>
                     </div>
                     <div className="col-md-9 col-lg-6 col-xl-5">
-                        <img src={imgs[0]} className="img-fluid" />
+                        <img src={imgs[0]} className="img-fluid" style={{opacity: 0.9}}/>
                     </div>
                 </div>
             </div>

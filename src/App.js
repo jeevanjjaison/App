@@ -5,7 +5,8 @@ import Login from "./Components/login";
 import SignUp from "./Components/signup";
 import Home from "./Components/Home";
 import Modal from "./Components/Modal";
-import Forgot from "./Components/forgot";
+import Forgot from "./Components/forgot/forgot";
+import Otp from "./Components/forgot/otp";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/login" element={loginStatus?<Navigate to ="/"/>:<Login permission="User"/>} />
           <Route path="/admin" element={loginStatus?<Navigate to ="/"/>:<Login permission ="Admin"/>} />
           <Route path="/signup" element={<SignUp page={page}/>} />
+          <Route path="/enterOtp" element={loginStatus?<Navigate to ="/"/>:<Otp/>}></Route>
         </Routes>
       </BrowserRouter>
       <Modal setStatus={setStatus} status={status} setModalOpen={setModalOpen} isOpen={isModalOpen}
